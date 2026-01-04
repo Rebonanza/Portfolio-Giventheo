@@ -1,0 +1,27 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import Skills from '../components/Skills.astro';
+import Projects from '../components/Projects.astro';
+import Contact from '../components/Contact.astro';
+import Footer from '../components/Footer.astro';
+
+import { projects } from '@data/projects';
+import { skillCategories } from '@data/skills';
+
+import '../styles/global.css';
+---
+
+<Layout title="Giventheo Khemides | Frontend & Backend Engineer" description="Portfolio of Giventheo Khemides, a Frontend & Backend Engineer with 2 years of experience specializing in Go, TypeScript, Python, Laravel, and modern web architectures.">
+  <Header />
+  <main class="flex-grow pt-16">
+    <Hero />
+    <About />
+    <Skills skillCategories={skillCategories} />
+    <Projects projects={projects} />
+    <Contact />
+  </main>
+  <Footer />
+</Layout>

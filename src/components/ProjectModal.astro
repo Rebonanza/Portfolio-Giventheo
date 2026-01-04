@@ -1,0 +1,237 @@
+---
+import type { Project } from '@type/project';
+
+interface Props {
+  projects: Project[];
+}
+
+const { projects } = Astro.props;
+---
+
+<!-- Modal Container -->
+<div id="project-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-slate-900/80 backdrop-blur-sm">
+  <div class="relative w-full max-w-6xl max-h-[90vh] bg-white rounded-2xl shadow-2xl overflow-hidden opacity-0 scale-95 transition-all duration-300" id="modal-content">
+    
+    <!-- Close Button -->
+    <button 
+      id="modal-close" 
+      class="absolute top-4 right-4 z-20 w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 group"
+      aria-label="Close modal"
+    >
+      <span class="material-symbols-outlined text-slate-700 group-hover:text-slate-900">close</span>
+    </button>
+
+    <div class="grid md:grid-cols-2 gap-0 h-full max-h-[90vh]">
+      <!-- Left: Image Carousel -->
+      <div class="relative bg-slate-100 flex items-center justify-center overflow-hidden">
+        <div id="carousel-container" class="relative w-full h-full min-h-[400px]">
+          <!-- Images will be injected here -->
+        </div>
+        
+        <!-- Carousel Navigation -->
+        <button 
+          id="carousel-prev" 
+          class="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 opacity-0"
+          aria-label="Previous image"
+        >
+          <span class="material-symbols-outlined text-slate-700">chevron_left</span>
+        </button>
+        <button 
+          id="carousel-next" 
+          class="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center bg-white/90 hover:bg-white rounded-full shadow-lg transition-all duration-200 hover:scale-110 opacity-0"
+          aria-label="Next image"
+        >
+          <span class="material-symbols-outlined text-slate-700">chevron_right</span>
+        </button>
+        
+        <!-- Carousel Indicators -->
+        <div id="carousel-indicators" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2"></div>
+      </div>
+
+      <!-- Right: Project Details -->
+      <div class="overflow-y-auto p-8 md:p-12">
+        <div id="modal-category" class="inline-block px-3 py-1 rounded-full text-xs font-medium border mb-4"></div>
+        <h2 id="modal-title" class="text-3xl font-bold text-slate-900 mb-4"></h2>
+        <p id="modal-description" class="text-lg text-slate-600 leading-relaxed mb-8"></p>
+        
+        <div class="mb-8">
+          <h3 class="text-sm font-semibold text-slate-900 uppercase tracking-wide mb-4">Technologies</h3>
+          <div id="modal-technologies" class="flex flex-wrap gap-2"></div>
+        </div>
+        
+        <div class="flex gap-4">
+          <a 
+            id="modal-live-link" 
+            class="inline-flex items-center gap-2 px-6 py-3 bg-slate-900 text-white font-semibold rounded-lg hover:bg-slate-800 transition-colors duration-200"
+            target="_blank"
+          >
+            View Project
+            <span class="material-symbols-outlined text-sm">open_in_new</span>
+          </a>
+          <a 
+            id="modal-github-link" 
+            class="inline-flex items-center gap-2 px-6 py-3 border border-slate-300 text-slate-700 font-semibold rounded-lg hover:bg-slate-50 transition-colors duration-200"
+            target="_blank"
+          >
+            Source Code
+            <span class="material-symbols-outlined text-sm">code</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script define:vars={{ projects }}>
+  let currentProjectIndex = 0;
+  let currentImageIndex = 0;
+  let currentProject = null;
+
+  const modal = document.getElementById('project-modal');
+  const modalContent = document.getElementById('modal-content');
+  const closeBtn = document.getElementById('modal-close');
+  const carouselContainer = document.getElementById('carousel-container');
+  const prevBtn = document.getElementById('carousel-prev');
+  const nextBtn = document.getElementById('carousel-next');
+  const indicatorsContainer = document.getElementById('carousel-indicators');
+
+  const categoryColors = {
+    'Internal Management System': 'bg-blue-50 text-blue-700 border-blue-200',
+    'Educational Platform': 'bg-indigo-50 text-indigo-700 border-indigo-200',
+    'Retail Management': 'bg-emerald-50 text-emerald-700 border-emerald-200',
+    'Event Portal': 'bg-purple-50 text-purple-700 border-purple-200',
+    'Government Portal': 'bg-cyan-50 text-cyan-700 border-cyan-200',
+  };
+
+  function openModal(projectId) {
+    currentProjectIndex = projects.findIndex(p => p.id === projectId);
+    currentProject = projects[currentProjectIndex];
+    currentImageIndex = 0;
+    
+    if (!currentProject) return;
+
+    // Populate modal content
+    document.getElementById('modal-category').textContent = currentProject.category;
+    document.getElementById('modal-category').className = `inline-block px-3 py-1 rounded-full text-xs font-medium border ${categoryColors[currentProject.category] || 'bg-slate-50 text-slate-700 border-slate-200'}`;
+    document.getElementById('modal-title').textContent = currentProject.title;
+    document.getElementById('modal-description').textContent = currentProject.description;
+    
+    // Technologies
+    const techContainer = document.getElementById('modal-technologies');
+    techContainer.innerHTML = currentProject.technologies.map(tech => 
+      `<span class="px-3 py-1 bg-slate-100 border border-slate-200 rounded text-sm font-mono text-slate-700">${tech}</span>`
+    ).join('');
+    
+    // Links
+    document.getElementById('modal-live-link').href = currentProject.liveUrl || '#';
+    document.getElementById('modal-github-link').href = currentProject.githubUrl || '#';
+    
+    // Setup carousel
+    setupCarousel();
+    
+    // Show modal with animation
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    setTimeout(() => {
+      modalContent.classList.remove('opacity-0', 'scale-95');
+      modalContent.classList.add('opacity-100', 'scale-100');
+    }, 10);
+    
+    // Prevent body scroll
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    modalContent.classList.add('opacity-0', 'scale-95');
+    modalContent.classList.remove('opacity-100', 'scale-100');
+    setTimeout(() => {
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }, 300);
+  }
+
+  function setupCarousel() {
+    // For now, use single image. Can be extended to support multiple images
+    const images = currentProject.imageUrl ? [currentProject.imageUrl] : [];
+    
+    carouselContainer.innerHTML = images.map((img, idx) => 
+      `<img src="${img}" alt="${currentProject.title}" class="absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${idx === 0 ? 'opacity-100' : 'opacity-0'}" data-index="${idx}" />`
+    ).join('');
+    
+    // Show/hide navigation buttons
+    if (images.length > 1) {
+      prevBtn.classList.remove('opacity-0');
+      nextBtn.classList.remove('opacity-0');
+      
+      // Setup indicators
+      indicatorsContainer.innerHTML = images.map((_, idx) => 
+        `<div class="w-2 h-2 rounded-full transition-all duration-200 ${idx === 0 ? 'bg-white w-6' : 'bg-white/50'}" data-indicator="${idx}"></div>`
+      ).join('');
+    } else {
+      prevBtn.classList.add('opacity-0');
+      nextBtn.classList.add('opacity-0');
+      indicatorsContainer.innerHTML = '';
+    }
+  }
+
+  function updateCarousel() {
+    const images = carouselContainer.querySelectorAll('img');
+    const indicators = indicatorsContainer.querySelectorAll('[data-indicator]');
+    
+    images.forEach((img, idx) => {
+      if (idx === currentImageIndex) {
+        img.classList.remove('opacity-0');
+        img.classList.add('opacity-100');
+      } else {
+        img.classList.add('opacity-0');
+        img.classList.remove('opacity-100');
+      }
+    });
+    
+    indicators.forEach((indicator, idx) => {
+      if (idx === currentImageIndex) {
+        indicator.classList.add('bg-white', 'w-6');
+        indicator.classList.remove('bg-white/50', 'w-2');
+      } else {
+        indicator.classList.remove('bg-white', 'w-6');
+        indicator.classList.add('bg-white/50', 'w-2');
+      }
+    });
+  }
+
+  function nextImage() {
+    const images = carouselContainer.querySelectorAll('img');
+    if (currentImageIndex < images.length - 1) {
+      currentImageIndex++;
+      updateCarousel();
+    }
+  }
+
+  function prevImage() {
+    if (currentImageIndex > 0) {
+      currentImageIndex--;
+      updateCarousel();
+    }
+  }
+
+  // Event listeners
+  closeBtn?.addEventListener('click', closeModal);
+  modal?.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+  });
+  prevBtn?.addEventListener('click', prevImage);
+  nextBtn?.addEventListener('click', (nextImage));
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (!modal.classList.contains('hidden')) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowLeft') prevImage();
+      if (e.key === 'ArrowRight') nextImage();
+    }
+  });
+
+  // Expose openModal globally for project cards
+  window.openProjectModal = openModal;
+</script>

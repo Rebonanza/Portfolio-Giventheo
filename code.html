@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>DevPortfolio - Full Stack Engineer</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&amp;family=Noto+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#25c0f4",
+                        "primary-glow": "rgba(37, 192, 244, 0.5)",
+                        "background-light": "#f5f8f8",
+                        "background-dark": "#0f172a", // Deep charcoal/slate
+                        "card-dark": "#1e293b",
+                        "border-dark": "#334155",
+                    },
+                    fontFamily: {
+                        "display": ["Space Grotesk", "sans-serif"],
+                        "body": ["Noto Sans", "sans-serif"],
+                        "mono": ["ui-monospace", "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono", "Courier New", "monospace"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "2xl": "1rem",
+                        "full": "9999px"
+                    },
+                    boxShadow: {
+                        'neon': '0 0 5px theme("colors.primary"), 0 0 20px theme("colors.primary-glow")',
+                        'glass': '0 4px 30px rgba(0, 0, 0, 0.1)',
+                    },
+                    backdropBlur: {
+                        'xs': '2px',
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        .glass-nav {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.4);
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .tech-pill:hover {
+            box-shadow: 0 0 10px rgba(37, 192, 244, 0.3);
+            border-color: #25c0f4;
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a; 
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155; 
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #25c0f4; 
+        }
+        
+        .glow-text:hover {
+            text-shadow: 0 0 8px rgba(37, 192, 244, 0.6);
+        }
+    </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 min-h-screen flex flex-col overflow-x-hidden selection:bg-primary selection:text-background-dark">
+<!-- Navbar -->
+<header class="fixed top-0 w-full z-50 glass-nav transition-all duration-300">
+<div class="max-w-[1280px] mx-auto px-4 sm:px-6 lg:px-8">
+<div class="flex items-center justify-between h-16">
+<!-- Logo -->
+<div class="flex items-center gap-2 group cursor-pointer">
+<span class="material-symbols-outlined text-primary text-3xl transition-transform group-hover:rotate-12">terminal</span>
+<h2 class="text-white text-xl font-bold tracking-tight">Dev<span class="text-primary">Portfolio</span></h2>
+</div>
+<!-- Desktop Menu -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-slate-400 hover:text-white text-sm font-medium transition-colors hover:translate-y-[-1px]" href="#about">About</a>
+<a class="text-slate-400 hover:text-white text-sm font-medium transition-colors hover:translate-y-[-1px]" href="#stack">Stack</a>
+<a class="text-slate-400 hover:text-white text-sm font-medium transition-colors hover:translate-y-[-1px]" href="#work">Work</a>
+<a class="text-slate-400 hover:text-white text-sm font-medium transition-colors hover:translate-y-[-1px]" href="#thoughts">Thoughts</a>
+<a class="text-slate-400 hover:text-white text-sm font-medium transition-colors hover:translate-y-[-1px]" href="#contact">Contact</a>
+<button class="bg-primary/10 hover:bg-primary text-primary hover:text-background-dark border border-primary/50 hover:border-primary transition-all duration-300 rounded-lg px-4 py-2 text-sm font-bold flex items-center gap-2 group">
+<span>Resume</span>
+<span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">download</span>
+</button>
+</nav>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-slate-300 hover:text-white p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</div>
+</header>
+<!-- Main Content Wrapper -->
+<main class="flex-grow pt-16">
+<!-- Hero Section -->
+<section class="relative min-h-[90vh] flex items-center justify-center px-4 overflow-hidden" id="hero">
+<!-- Background Decoration -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] pointer-events-none"></div>
+<div class="max-w-[1024px] w-full z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+<div class="flex flex-col gap-6 order-2 lg:order-1">
+<div class="flex items-center gap-2 text-primary font-mono text-sm tracking-wider opacity-80">
+<span class="material-symbols-outlined text-sm">code</span>
+<span>FULL-STACK ENGINEER</span>
+</div>
+<h1 class="text-4xl sm:text-6xl font-black leading-tight tracking-tight text-white">
+                        Building the future, <br/>
+<span class="text-transparent bg-clip-text bg-gradient-to-r from-white to-slate-500">one commit at a time.</span>
+</h1>
+<p class="text-slate-400 text-lg leading-relaxed max-w-lg">
+                        I solve expensive problems with cheap code. Passionate about minimalist design, robust architecture, and user-centric engineering.
+                    </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-primary hover:bg-primary/90 text-background-dark font-bold rounded-lg px-6 py-3 transition-all hover:shadow-neon flex items-center gap-2" href="#work">
+                            View Selected Work
+                            <span class="material-symbols-outlined text-sm">arrow_downward</span>
+</a>
+<a class="bg-slate-800/50 hover:bg-slate-700/50 text-white font-medium border border-slate-700 hover:border-primary/50 rounded-lg px-6 py-3 transition-all flex items-center gap-2" href="#contact">
+                            Contact Me
+                        </a>
+</div>
+<!-- Social Proof / Stats -->
+<div class="flex gap-8 pt-8 border-t border-slate-800 mt-4">
+<div>
+<p class="text-2xl font-bold text-white">5+</p>
+<p class="text-slate-500 text-xs font-mono uppercase">Years Exp.</p>
+</div>
+<div>
+<p class="text-2xl font-bold text-white">40+</p>
+<p class="text-slate-500 text-xs font-mono uppercase">Projects</p>
+</div>
+<div>
+<p class="text-2xl font-bold text-white">100%</p>
+<p class="text-slate-500 text-xs font-mono uppercase">Commitment</p>
+</div>
+</div>
+</div>
+<div class="order-1 lg:order-2 flex justify-center lg:justify-end relative">
+<div class="relative w-full max-w-[400px] aspect-square rounded-2xl overflow-hidden border border-slate-800 group shadow-2xl shadow-primary/5">
+<div class="absolute inset-0 bg-gradient-to-tr from-background-dark via-transparent to-primary/20 opacity-60 z-10 group-hover:opacity-40 transition-opacity"></div>
+<img alt="Coding Environment" class="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105 filter grayscale hover:grayscale-0" data-alt="Close up of computer code on a dark monitor with blue neon lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAXASdFIwxuks4ZQCiTThHPzZ_df5SQHjigBgqzmuPFd4ENxYc8sYpzXmWZBa1aJGC7QHZv_GW92OYHjwZM02zqLM6hApUggtdnDTpmCBITaCJy9DsOboDQLjaIiQuhP7lWmv56fLfimcC7JrolKCwr1eZqLMzUOs_8i9daMMaZih4Y1Yc6zLAP2pQhvjwtVoRfJ4-uIV6dwDgjpOoB6VbZ-kMpLiUJF68t5UZb31JPhYJ39Bldvq30K948HRKlvBvNDomSkHCrmA"/>
+<!-- Floating Code Snippet Card -->
+<div class="absolute -bottom-6 -left-6 z-20 bg-background-dark/90 backdrop-blur-md border border-slate-700 rounded-lg p-4 shadow-xl hidden sm:block animate-pulse">
+<div class="flex gap-1.5 mb-2">
+<div class="w-2.5 h-2.5 rounded-full bg-red-500"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-yellow-500"></div>
+<div class="w-2.5 h-2.5 rounded-full bg-green-500"></div>
+</div>
+<pre class="font-mono text-[10px] text-slate-300">const future = async () =&gt; {
+  await build(dream);
+  return reality;
+}</pre>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- About Me Section -->
+<section class="py-20 px-4 bg-background-dark border-t border-slate-800/50" id="about">
+<div class="max-w-[960px] mx-auto">
+<div class="flex items-center gap-4 mb-8">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">About Me</h2>
+</div>
+<div class="grid md:grid-cols-3 gap-12">
+<div class="md:col-span-2">
+<h3 class="text-2xl md:text-3xl font-bold text-white mb-6 leading-relaxed">
+                            I am a software engineer who believes in clean code and user-centric design.
+                        </h3>
+<div class="space-y-4 text-slate-400 leading-relaxed text-lg">
+<p>
+                                My journey started with tweaking CSS on MySpace profiles and evolved into architecting scalable cloud solutions for enterprise clients. I thrive in the sweet spot between engineering and design.
+                            </p>
+<p>
+                                Whether it's optimizing database queries or fine-tuning micro-interactions, I bring a detail-oriented approach to every layer of the stack.
+                            </p>
+</div>
+</div>
+<div class="glass-card rounded-xl p-6 flex flex-col gap-4">
+<div class="flex items-center gap-3 text-white">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<span class="font-bold">My Philosophy</span>
+</div>
+<ul class="space-y-3">
+<li class="flex items-start gap-3 text-sm text-slate-400">
+<span class="material-symbols-outlined text-xs mt-1 text-primary">check_circle</span>
+<span>Complexity is a liability. Keep it simple.</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-slate-400">
+<span class="material-symbols-outlined text-xs mt-1 text-primary">check_circle</span>
+<span>Code is read more than written.</span>
+</li>
+<li class="flex items-start gap-3 text-sm text-slate-400">
+<span class="material-symbols-outlined text-xs mt-1 text-primary">check_circle</span>
+<span>User experience drives architecture.</span>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+<!-- Tech Stack Section -->
+<section class="py-20 px-4 bg-slate-900/30 relative" id="stack">
+<div class="max-w-[960px] mx-auto">
+<div class="flex items-center gap-4 mb-10">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">Tech Stack</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Frontend -->
+<div class="group bg-card-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">desktop_windows</span>
+<h3 class="text-white font-bold">Frontend</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">React</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Next.js</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">TypeScript</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Tailwind CSS</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Framer Motion</span>
+</div>
+</div>
+<!-- Backend -->
+<div class="group bg-card-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">dns</span>
+<h3 class="text-white font-bold">Backend</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Node.js</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Python</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">PostgreSQL</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">GraphQL</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Redis</span>
+</div>
+</div>
+<!-- DevOps & Tools -->
+<div class="group bg-card-dark border border-border-dark p-6 rounded-xl hover:border-primary/50 transition-colors">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">deployed_code</span>
+<h3 class="text-white font-bold">DevOps &amp; Tools</h3>
+</div>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Docker</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">AWS</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Git</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">Figma</span>
+<span class="px-3 py-1 rounded-full bg-slate-800 text-slate-300 text-xs font-mono border border-slate-700 tech-pill cursor-default transition-all">CI/CD</span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Selected Projects Section -->
+<section class="py-20 px-4 bg-background-dark" id="work">
+<div class="max-w-[960px] mx-auto">
+<div class="flex items-center justify-between mb-10">
+<div class="flex items-center gap-4">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">Selected Projects</h2>
+</div>
+<a class="text-sm text-slate-400 hover:text-white flex items-center gap-1 group" href="#">
+                        View All
+                        <span class="material-symbols-outlined text-sm group-hover:translate-x-1 transition-transform">arrow_forward</span>
+</a>
+</div>
+<div class="space-y-12">
+<!-- Project 1 -->
+<div class="group relative grid md:grid-cols-12 gap-6 items-center">
+<div class="md:col-span-7 relative z-10 order-2 md:order-1">
+<div class="bg-card-dark border border-border-dark rounded-xl overflow-hidden shadow-2xl group-hover:border-primary/30 transition-all duration-500">
+<div class="aspect-video bg-cover bg-center" data-alt="Screenshot of a complex financial dashboard with data charts" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2q9ehAT5nGIychA-J_osbW_f49KfkhdHavIuhzBK4jMr_HM5N6mXtTSnMFU_mMdrxswyvyuDSV1EvM8RHLiTMZU1AiuaF3j4BEZKkPpvD4HdG7XjFbwmWGF3OoJ_O5iwaDiEczPA8vMyTfZqSWDy2qZR3n-9YLeI9uoOrEQgSDlO5RVvIggYH-HjqqAcQWThW0-3CayxoWhCwiCqs5TYYoQYM1fv3k9kWVCqHwx5esKt7dgrZAU3a2YWHEtU-slWQ_kyO48pD5A8");'>
+<div class="w-full h-full bg-background-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
+</div>
+</div>
+</div>
+<div class="md:col-span-5 relative z-20 order-1 md:order-2 flex flex-col gap-4 md:-ml-12 md:mt-8">
+<div class="text-right md:text-left">
+<h3 class="text-primary font-mono text-xs mb-1">Featured Project</h3>
+<h2 class="text-2xl font-bold text-white mb-3">FinTech Dashboard</h2>
+<div class="bg-slate-800/90 backdrop-blur-md p-6 rounded-lg shadow-xl border border-slate-700/50 mb-4 text-slate-300 text-sm leading-relaxed">
+                                    A real-time financial data visualization platform handling over 50k transactions per second. Optimized for performance and readability.
+                                </div>
+<div class="flex flex-wrap gap-2 justify-end md:justify-start">
+<span class="text-xs font-mono text-slate-400">React</span>
+<span class="text-xs font-mono text-slate-400">D3.js</span>
+<span class="text-xs font-mono text-slate-400">WebSocket</span>
+</div>
+<div class="flex gap-4 mt-4 justify-end md:justify-start">
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">code</span></a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+</div>
+</div>
+</div>
+</div>
+<!-- Project 2 (Alternate Layout) -->
+<div class="group relative grid md:grid-cols-12 gap-6 items-center">
+<div class="md:col-span-5 relative z-20 flex flex-col gap-4 md:-mr-12 md:mt-8 md:text-right">
+<div>
+<h3 class="text-primary font-mono text-xs mb-1">Open Source</h3>
+<h2 class="text-2xl font-bold text-white mb-3">Nebula CLI</h2>
+<div class="bg-slate-800/90 backdrop-blur-md p-6 rounded-lg shadow-xl border border-slate-700/50 mb-4 text-slate-300 text-sm leading-relaxed text-left md:text-right">
+                                    A command-line interface tool for developers to quickly scaffold microservices with best practices baked in. 
+                                </div>
+<div class="flex flex-wrap gap-2 md:justify-end">
+<span class="text-xs font-mono text-slate-400">Go</span>
+<span class="text-xs font-mono text-slate-400">Docker</span>
+<span class="text-xs font-mono text-slate-400">gRPC</span>
+</div>
+<div class="flex gap-4 mt-4 md:justify-end">
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">code</span></a>
+<a class="text-slate-400 hover:text-white transition-colors" href="#"><span class="material-symbols-outlined">open_in_new</span></a>
+</div>
+</div>
+</div>
+<div class="md:col-span-7 relative z-10">
+<div class="bg-card-dark border border-border-dark rounded-xl overflow-hidden shadow-2xl group-hover:border-primary/30 transition-all duration-500">
+<div class="aspect-video bg-cover bg-center" data-alt="Abstract representation of command line interface with matrix style code" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD14NzAhRmWyHzkoyBz97DXeT6whMRFnTkoI46Sygzzm7xOBnn1hUUnUic9-NOCEG-zpAGpBFZPnyK_7ezue-PXKHfumf_x0BKdcNFyawwAvreI9nWL-8KYEcNZaP7n0bySQiflkSzQJHZQDt9kvb_FKFck1z8O_dLwTasu3BaeqfFS_fK1Bgtic9hU56Zs70xUXBa7fyx44SUN0q6yYddXd-e33ltE8LGNZdkhkpruj7uzxbDZN9WSQfJ_M6_WWhEhrCa-VbMlzvg");'>
+<div class="w-full h-full bg-background-dark/20 group-hover:bg-transparent transition-colors duration-500"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Thoughts & Interests Section -->
+<section class="py-20 px-4 bg-slate-900/30" id="thoughts">
+<div class="max-w-[960px] mx-auto grid md:grid-cols-2 gap-16">
+<!-- How I Think -->
+<div>
+<div class="flex items-center gap-4 mb-8">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">How I Think</h2>
+</div>
+<div class="space-y-4">
+<details class="group bg-card-dark border border-border-dark rounded-lg open:border-primary/50 transition-colors">
+<summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-white">
+<span>Simplicity &gt; Complexity</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+</summary>
+<div class="text-slate-400 px-4 pb-4 text-sm leading-relaxed border-t border-slate-800 pt-3 mt-1">
+                                Every line of code is a liability. I strive to solve problems with the least amount of code possible, focusing on readability and maintainability over clever one-liners.
+                            </div>
+</details>
+<details class="group bg-card-dark border border-border-dark rounded-lg open:border-primary/50 transition-colors">
+<summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-white">
+<span>Shipping is a Feature</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+</summary>
+<div class="text-slate-400 px-4 pb-4 text-sm leading-relaxed border-t border-slate-800 pt-3 mt-1">
+                                Perfect is the enemy of good. I believe in iterative development—getting MVP into users' hands quickly to gather feedback and improve rapidly.
+                            </div>
+</details>
+<details class="group bg-card-dark border border-border-dark rounded-lg open:border-primary/50 transition-colors">
+<summary class="flex justify-between items-center font-bold cursor-pointer list-none p-4 text-white">
+<span>Ownership Mentality</span>
+<span class="material-symbols-outlined transition-transform group-open:rotate-180 text-primary">expand_more</span>
+</summary>
+<div class="text-slate-400 px-4 pb-4 text-sm leading-relaxed border-t border-slate-800 pt-3 mt-1">
+                                I don't just write code; I own the product. From the initial architecture to the deployment pipeline and user support, I care about the entire lifecycle.
+                            </div>
+</details>
+</div>
+</div>
+<!-- Currently Exploring -->
+<div>
+<div class="flex items-center gap-4 mb-8">
+<span class="h-px w-8 bg-primary"></span>
+<h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">Currently Exploring</h2>
+</div>
+<div class="bg-card-dark border border-border-dark rounded-xl p-6 relative overflow-hidden">
+<div class="absolute top-0 right-0 w-32 h-32 bg-primary/5 rounded-full blur-[40px] pointer-events-none"></div>
+<div class="grid grid-cols-1 gap-6">
+<div class="flex items-start gap-4">
+<div class="bg-slate-800 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">smart_toy</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">AI Agents</h4>
+<p class="text-sm text-slate-400">Building autonomous agents using LLMs to automate dev workflows.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-slate-800 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">Rust</h4>
+<p class="text-sm text-slate-400">Learning Rust for high-performance CLI tools and WASM modules.</p>
+</div>
+</div>
+<div class="flex items-start gap-4">
+<div class="bg-slate-800 p-2 rounded-lg text-primary">
+<span class="material-symbols-outlined">keyboard</span>
+</div>
+<div>
+<h4 class="text-white font-bold mb-1">Mechanical Keyboards</h4>
+<p class="text-sm text-slate-400">Obsessing over switches, keycaps, and ergonomic layouts.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-24 px-4 bg-background-dark relative" id="contact">
+<div class="absolute bottom-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-primary/20 to-transparent"></div>
+<div class="max-w-[600px] mx-auto text-center flex flex-col items-center">
+<span class="text-primary font-mono text-sm tracking-widest uppercase mb-4">What's Next?</span>
+<h2 class="text-4xl md:text-5xl font-black text-white mb-6">Let's build something.</h2>
+<p class="text-slate-400 text-lg mb-10 max-w-md">
+                    Whether you have a question, a project idea, or just want to say hi, my inbox is always open.
+                </p>
+<a class="group relative inline-flex items-center justify-center px-8 py-4 font-bold text-background-dark transition-all duration-200 bg-primary font-display rounded-lg hover:w-full hover:px-12 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary focus:ring-offset-gray-900" href="mailto:hello@example.com">
+<span class="absolute inset-0 w-full h-full -mt-1 rounded-lg opacity-30 bg-gradient-to-b from-transparent via-transparent to-black"></span>
+<span class="relative flex items-center gap-2">
+                        Say Hello 
+                        <span class="material-symbols-outlined group-hover:rotate-45 transition-transform duration-300">send</span>
+</span>
+</a>
+<div class="mt-12 flex gap-8">
+<a class="text-slate-500 hover:text-primary transition-colors hover:-translate-y-1 transform duration-300" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors hover:-translate-y-1 transform duration-300" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24">
+<path clip-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" fill-rule="evenodd"></path>
+</svg>
+</a>
+<a class="text-slate-500 hover:text-primary transition-colors hover:-translate-y-1 transform duration-300" href="#">
+<svg aria-hidden="true" class="h-6 w-6" fill="currentColor" viewbox="0 0 24 24">
+<path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"></path>
+</svg>
+</a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="py-6 bg-background-dark border-t border-slate-800 text-center">
+<p class="text-slate-600 text-sm font-mono">
+            Designed &amp; Built by DevPortfolio. © 2024
+        </p>
+</footer>
+</body></html>

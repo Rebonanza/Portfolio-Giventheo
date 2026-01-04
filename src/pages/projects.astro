@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+import { projects } from '@data/projects';
+import '../styles/global.css';
+---
+
+<Layout 
+  title="All Projects | Giventheo Khemides" 
+  description="View all my projects - frontend and backend applications, open source contributions, and experiments."
+>
+  <Header />
+  <main class="flex-grow pt-16">
+    <!-- Projects Header -->
+    <section class="py-20 px-4 bg-background-dark border-b border-slate-800/50">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="flex items-center gap-4 mb-6">
+          <span class="h-px w-8 bg-primary"></span>
+          <h2 class="text-primary font-mono uppercase tracking-widest text-sm font-bold">All Projects</h2>
+        </div>
+        <h1 class="text-4xl md:text-5xl font-black text-white mb-4">
+          Things I've Built
+        </h1>
+        <p class="text-slate-400 text-lg max-w-2xl">
+          A collection of projects showcasing my journey through different technologies, architectures, and problem-solving approaches.
+        </p>
+      </div>
+    </section>
+
+    <!-- All Projects Grid -->
+    <section class="py-20 px-4 bg-slate-900/30">
+      <div class="max-w-[1200px] mx-auto">
+        <div class="space-y-8">
+          {projects.map((project, index) => (
+            <ProjectCard project={project} index={index} />
+          ))}
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

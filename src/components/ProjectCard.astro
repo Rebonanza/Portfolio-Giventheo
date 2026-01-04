@@ -1,0 +1,52 @@
+---
+import type { Project } from '@type/project';
+
+interface Props {
+  project: Project;
+  index: number;
+}
+
+const { project, index } = Astro.props;
+---
+
+<!-- Project Card - Polished Design -->
+<div class="group relative flex flex-col overflow-hidden rounded-xl border border-slate-800 bg-card-dark/60 backdrop-blur-md transition-all duration-300 hover:border-primary/50 hover:shadow-[0_0_30px_rgba(37,140,244,0.3)] hover:-translate-y-1">
+  <!-- Image -->
+  <div class="relative aspect-video w-full overflow-hidden bg-slate-800">
+    <div 
+      class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" 
+      style={`background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuB2q9ehAT5nGIychA-J_osbW_f49KfkhdHavIuhzBK4jMr_HM5N6mXtTSnMFU_mMdrxswyvyuDSV1EvM8RHLiTMZU1AiuaF3j4BEZKkPpvD4HdG7XjFbwmWGF3OoJ_O5iwaDiEczPA8vMyTfZqSWDy2qZR3n-9YLeI9uoOrEQgSDlO5RVvIggYH-HjqqAcQWThW0-3CayxoWhCwiCqs5TYYoQYM1fv3k9kWVCqHwx5esKt7dgrZAU3a2YWHEtU-slWQ_kyO48pD5A8");`}
+    >
+    </div>
+    <div class="absolute inset-0 bg-gradient-to-t from-background-dark/80 to-transparent opacity-60"></div>
+  </div>
+  
+  <!-- Content -->
+  <div class="flex flex-1 flex-col p-6">
+    <div class="flex justify-between items-start mb-4">
+      <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">
+        {project.title}
+      </h3>
+      <a 
+        class="flex items-center justify-center w-8 h-8 rounded-full bg-slate-800 text-slate-300 hover:bg-primary hover:text-white transition-colors" 
+        href="#"
+        aria-label="Open project"
+      >
+        <span class="material-symbols-outlined text-[20px]">arrow_outward</span>
+      </a>
+    </div>
+    
+    <p class="text-slate-400 text-sm leading-relaxed mb-6 flex-grow">
+      {project.description}
+    </p>
+    
+    <!-- Tech Stack -->
+    <div class="flex flex-wrap gap-2 mt-auto">
+      {project.technologies.slice(0, 3).map((tech) => (
+        <span class="inline-flex items-center rounded-md bg-primary/10 px-2 py-1 text-xs font-medium text-primary ring-1 ring-inset ring-primary/20">
+          {tech}
+        </span>
+      ))}
+    </div>
+  </div>
+</div>
