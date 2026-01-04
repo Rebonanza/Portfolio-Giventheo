@@ -4,6 +4,8 @@ interface Props {
   description?: string;
 }
 
+import GoToTop from '../components/GoToTop.astro';
+
 const { title, description = 'Frontend & Backend Engineer portfolio showcasing modern web development projects' } = Astro.props;
 ---
 
@@ -49,5 +51,6 @@ const { title, description = 'Frontend & Backend Engineer portfolio showcasing m
   </head>
   <body>
     <slot />
+    <GoToTop />
   </body>
 </html>
