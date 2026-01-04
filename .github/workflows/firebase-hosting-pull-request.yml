@@ -16,4 +16,4 @@ jobs:
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_GIVENTHEO_PORTFOLIO }}'
-          projectId: giventheo-portfolio
+          projectId: gvnthe

@@ -4,7 +4,7 @@ export const skillCategories: SkillCategory[] = [
   {
     title: 'Backend',
     icon: 'dns',
-    color: 'purple-400',
+    color: 'primary',
     skills: [
       { name: 'Go', category: 'Language', icon: 'data_object' },
       { name: 'Node.js', category: 'Runtime', icon: 'terminal' },
@@ -24,17 +24,18 @@ export const skillCategories: SkillCategory[] = [
       { name: 'React JS', category: 'Library', icon: 'data_object' },
       { name: 'Astro', category: 'Framework', icon: 'rocket_launch' },
       { name: 'Tailwind CSS', category: 'Styling', icon: 'palette' },
+      { name: 'Bootstrap CSS', category: 'Styling', icon: 'palette' },
       { name: 'Next.js', category: 'Framework', icon: 'keyboard_command_key' },
     ],
   },
   {
     title: 'Tools & Others',
     icon: 'settings_system_daydream',
-    color: 'cyan-400',
+    color: 'primary',
     skills: [
       { name: 'Git', category: 'Version Control', icon: 'account_tree' },
       { name: 'Docker', category: 'Containerization', icon: 'inventory_2' },
-      { name: 'AWS', category: 'Cloud Provider', icon: 'cloud_queue' },
+      // { name: 'AWS', category: 'Cloud Provider', icon: 'cloud_queue' },
       { name: 'Linux', category: 'OS', icon: 'terminal' },
     ],
   },
