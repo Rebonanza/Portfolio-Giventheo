@@ -20,5 +20,5 @@ yarn-error.log*
 pnpm-debug.log*
 
 # ide
-.vscode
+# .vscode
 .idea
