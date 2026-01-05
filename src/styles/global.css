@@ -66,6 +66,31 @@
   .glow-text:hover {
     text-shadow: 0 0 8px rgba(37, 192, 244, 0.6);
   }
+
+  /* Mobile Navigation */
+  .mobile-nav {
+    animation: slideUpNav 0.3s ease-out forwards;
+  }
+
+  .mobile-nav-item {
+    @apply flex flex-col items-center justify-center text-slate-400 transition-all duration-200;
+    @apply min-w-[60px] py-1;
+  }
+
+  .mobile-nav-item:active {
+    @apply scale-95;
+  }
+
+  @keyframes slideUpNav {
+    from {
+      transform: translateY(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
 }
 
 @layer utilities {
